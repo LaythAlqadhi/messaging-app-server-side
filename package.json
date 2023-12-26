@@ -1,5 +1,5 @@
 {
-  "name": "node",
+  "name": "express app",
   "version": "0.0.0",
   "engines": {
     "node": ">=20.10.0"
@@ -23,6 +23,7 @@
   "eslintConfig": {
     "extends": [
       "airbnb-base",
+      "plugin:node/recommended",
       "prettier"
     ],
     "plugins": [
