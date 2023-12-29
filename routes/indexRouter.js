@@ -2,9 +2,9 @@ const express = require('express');
 
 const router = express.Router();
 
-/* GET users listing. */
+// Redirect the client to the valid path.
 router.get('/', (req, res, next) => {
-  res.send('respond with a resource');
+  res.redirect('/v1');
 });
 
 module.exports = router;
