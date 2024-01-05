@@ -48,6 +48,10 @@ userSchema.pre('save', async function hashPassword(next) {
   }
 });
 
+userSchema.virtual('fullName').get(function getFullName() {
+  return `${this.firstName} ${this.lastName}`;
+});
+
 userSchema.set('toJSON', { virtuals: true });
 
 module.exports = mongoose.model('User', userSchema);
