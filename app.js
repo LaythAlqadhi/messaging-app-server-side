@@ -27,7 +27,7 @@ app.set('view engine', 'pug');
 // Rate limiting
 const limiter = RateLimit({
   windowMs: 1 * 60 * 1000,
-  max: 20,
+  max: 40,
 });
 
 // Apply Express middleware
