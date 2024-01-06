@@ -28,11 +28,17 @@ const userSchema = new Schema(
         type: String,
         required: true,
       },
+      fullName: String,
       avatar: String,
     },
   },
   { timestamps: true },
 );
+
+userSchema.pre('save', function updateFullName(next) {
+  this.profile.fullName = `${this.profile.firstName} ${this.profile.lastName}`;
+  next();
+});
 
 userSchema.pre('save', async function hashPassword(next) {
   if (!this.isModified('password')) {
@@ -46,10 +52,6 @@ userSchema.pre('save', async function hashPassword(next) {
   } catch (error) {
     return next(error);
   }
-});
-
-userSchema.virtual('fullName').get(function getFullName() {
-  return `${this.firstName} ${this.lastName}`;
 });
 
 userSchema.set('toJSON', { virtuals: true });

@@ -22,7 +22,6 @@ exports.user_get = [
 ];
 
 exports.users_get = [
-  authenticate,
 
   asyncHandler(async (req, res, next) => {
     const users = await User.find({});
@@ -112,7 +111,7 @@ exports.user_signup_post = [
       res.json({ errors: errors.array() });
     } else {
       await user.save();
-      res.status(200).json({ user });
+      res.status(200).json(user);
     }
   }),
 ];
