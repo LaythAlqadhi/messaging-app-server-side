@@ -70,7 +70,10 @@ exports.chat_get = [
     if (!chat) {
       res.sendStatus(404);
       return;
-    } 
+    } else if (!chat.users.map(String).includes(req.user.id.toString())) {
+      res.sendStatus(403);
+      return;
+    }
 
     chat.messages = chat.messages.map((message) => ({
       ...message,
