@@ -20,29 +20,30 @@ exports.chat_post = [
       return;
     }
 
-    const user = await User.findOne({ username: req.body.username }, '_id');
+    const user = await User.findOne({ username: req.body.username });
 
     if (!user) {
       res.sendStatus(404);
       return;
     }
 
-    const chat = new Chat({
+    const chat = await Chat.findOne({ users: { $all: [req.user.id, user.id] } });
+
+    if (chat) {
+      res.json({ errors: [{ msg: 'The chat room already exists.'}]})
+      return;
+    }
+
+    const newChat = new Chat({
       users: [req.user.id, user.id],
       messages: [{
         user: req.user.id,
-        content: 'Yo🔥👍🏿',
-      }, {
-        user: req.user.id,
-        content: 'sup dude!',
-      }, {
-        user: user.id,
-        content: 'Hi!',
+        content: `${req.user.profile.firstName} added ${user.profile.firstName} to this chat room.`,
       }]
     })
 
-    await chat.save();
-    res.status(200).json(chat);
+    await newChat.save();
+    res.status(200).json(newChat);
   }),
 ];
 
