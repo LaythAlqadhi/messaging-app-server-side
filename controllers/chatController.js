@@ -65,7 +65,7 @@ exports.chat_get = [
 
     const chat = await Chat.findById(req.params.chatId, {
       users: 1,
-      messages: 1,
+      messages: { $slice: -25 },
     })
       .populate({
         path: 'messages.user',
@@ -83,10 +83,15 @@ exports.chat_get = [
       return;
     }
 
-    chat.messages = chat.messages.map((message) => ({
-      ...message,
-      isSender: message.user['_id'].toString() === req.user.id.toString(),
-    }));
+    chat.messages.forEach(message => {
+      message.id = message._id.toString();
+      delete message._id;
+      
+      message.user.id = message.user._id.toString();
+      delete message.user._id;
+      
+      message.isSender = message.user._id.toString() === req.user.id.toString();
+    });
 
     res.status(200).json(chat);
   }),
