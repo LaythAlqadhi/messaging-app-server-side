@@ -22,7 +22,6 @@ exports.user_get = [
 ];
 
 exports.users_get = [
-
   asyncHandler(async (req, res, next) => {
     const users = await User.find({});
 
