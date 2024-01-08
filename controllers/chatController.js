@@ -137,8 +137,6 @@ exports.message_post = [
       res.json({ errors: errors.array() });
     }
 
-    // const chat = await Chat.findById(req.body.chatId)
-
     const message = {
       user: req.user.id,
       content: req.body.content,
@@ -149,6 +147,11 @@ exports.message_post = [
       { $push: { messages: message } },
       { new: true },
     );
+
+    if (!chat) {
+      res.sendStatus(403);
+      return;
+    }
 
     res.status(200).json(chat);
   }),
