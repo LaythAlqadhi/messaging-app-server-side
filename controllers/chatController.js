@@ -83,14 +83,11 @@ exports.chat_get = [
       return;
     }
 
-    chat.messages.forEach(message => {
-      message.id = message._id.toString();
-      delete message._id;
+    chat.messages.map(message => {
+      message.id = message._id;
+      message.user.id = message.user._id;
       
-      message.user.id = message.user._id.toString();
-      delete message.user._id;
-      
-      message.isSender = message.user._id.toString() === req.user.id.toString();
+      message.isSender = message.user.id.toString() === req.user.id.toString();
     });
 
     res.status(200).json(chat);
