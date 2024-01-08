@@ -115,7 +115,7 @@ exports.user_signup_post = [
   }),
 ];
 
-exports.user_login_post = [
+exports.user_signin_post = [
   body('username')
     .trim()
     .notEmpty()

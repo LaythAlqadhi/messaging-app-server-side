@@ -7,7 +7,7 @@ const router = express.Router();
 router.post('/user/signup', userController.user_signup_post);
 
 // POST request to log in the user.
-router.post('/user/login', userController.user_login_post);
+router.post('/user/signin', userController.user_signin_post);
 
 // GET request for one user.
 router.get('/user/:userId', userController.user_get);
