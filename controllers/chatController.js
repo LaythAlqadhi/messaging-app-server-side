@@ -65,7 +65,7 @@ exports.chat_get = [
 
     const chat = await Chat.findById(req.params.chatId, {
       users: 1,
-      messages: { $slice: -25 },
+      messages: { $slice: -100 },
     })
       .populate({
         path: 'messages.user',
