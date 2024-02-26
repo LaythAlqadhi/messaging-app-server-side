@@ -15,10 +15,10 @@ Check out the web application [Messaging App](https://messaging-app-three.vercel
 - Chat
 
 ## Features
-- Designed using RESTful architectural style.
-- Preventing unauthenticated users from accessing private routes.
-- Authenticating users using the Passport-JWT and Passport-Local strategies.
-- Validating and sanitizing client data using Express-validator.
+- Implemented RESTful architectural style for efficient communication.
+- Secured private routes by restricting access to unauthenticated users.
+- Authenticated users via Passport-JWT and Passport-Local strategies for robust security.
+- Ensured data integrity by validating and sanitizing client inputs through Express-validator.
 
 ## Installation
 1. **Clone the Repository:**
